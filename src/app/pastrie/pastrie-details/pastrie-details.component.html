@@ -1,0 +1,36 @@
+<div class="card text-center" *ngIf="pastrie">
+    <img *ngIf="pastrie.url" class="card-img-top" src="{{pastrie.url}}">
+    <div class="card-header">
+        <h3>{{pastrie.ref}}</h3>
+    </div>
+    <div class="card-body">
+        <h4>{{pastrie.name}}</h4>
+    <ul *ngIf="ingredients" class="list-group card">
+        <div class="card-header">
+            <h2>Liste des ingrédients</h2>
+            <p>Nombre de pâtisseries que qu'il vous reste à choisir : {{maxPastries}}</p>
+            <span role="button" class="float-start badge rounded-pill text-bg-light" (click)="Sorted()"> {{sens ? " Desc" : " Asc"}}<i class="bi bi-arrow-down-up float-start"></i></span>
+            <span role="button" *ngIf="maxPastries > 0" class="badge rounded-pill text-bg-success float-end" (click)="preference(pastrie.id)"> Choice </span>
+            <span class="btn-primary badge bg-info" *ngIf="pastrie.choice == 'Priority' "> Priority </span>
+        </div>
+        
+            
+        
+        <li *ngFor="let ingredient of ingredients" class="list-group-item">
+            <div>{{ingredient}}
+                <a (click)="DeleteRecipe(ingredient)" class="bg-light p-0 float-end">
+                    <img class="bg-light p-0 float-end" src="./assets/svg/file-x.svg">
+                </a>
+            </div>
+        </li>
+    </ul>
+    </div>
+    <label for="label{{pastrie.id}}">Ajouter un ingrédient</label>
+    <input id="label{{pastrie.id}}"
+    (keyup.enter)="AddRecipe($event)"/>
+</div>
+
+
+
+
+

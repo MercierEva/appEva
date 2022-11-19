@@ -1,0 +1,33 @@
+  <app-search (searchPastries)="search($event)" (partialPastrieSearch)="search($event)"></app-search>
+  <div class="container-sm w-75">
+    <h1 class="my-2 mb-5">{{titlePage}}</h1>
+    <div class="row">       
+        <div class="col col-sw-4">
+            <app-pastrie-details  [maxPastries]="maxPastries" (changePreference)="changeParentPreference($event)" [pastrie]="selectPastry" (hidePastrie)="hidePastrieDetail($event)"></app-pastrie-details>
+        </div>
+        <div class="col col-sw-8 pastrie" >
+            <ul *ngIf="pastries" class="list-group">
+                <li class="list-inline-item " *ngFor="let pastrie of pastries">
+                    <div class="card mb-3" appBorderCard="red">
+                        <div class="card-header">
+                            {{pastrie.ref}}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{pastrie.name}}</h5>
+                            <p class="card-text">{{pastrie.description}}</p>
+                            <ul class="p-0" *ngIf="pastrie.tags" >
+                                <li class="list-inline-item mx-1" *ngFor="let tag of pastrie.tags">
+                                    <span class=" badge {{tag | pastrieTagColor }}">{{tag}}</span>
+                                </li>
+                            </ul>
+                            <button class="border rounded-1 border-dark px-2 m-2">fr</button>
+                            <span ><img src="./assets/svg/suit-heart-fill.svg"> {{pastrie.like}}</span>
+                            <span  class="mx-2"><img src="./assets/svg/fast-forward-fill.svg"> {{pastrie.quantity}}</span>unités disponibles.
+                        </div>
+                        <button class="bg-light border" (click)="selectedPastry(pastrie)">Detail</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
